@@ -1,1 +1,1 @@
-# ethshangai-escrow-board
+# Escrow Board
