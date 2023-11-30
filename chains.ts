@@ -14,6 +14,12 @@ const MATIC: AddEthereumChainParameter['nativeCurrency'] = {
   decimals: 18,
 }
 
+const KLAY: AddEthereumChainParameter['nativeCurrency'] = {
+  name: 'Klayton',
+  symbol: 'KLAY',
+  decimals: 18,
+}
+
 interface BasicChainInformation {
   urls: string[]
   name: string
@@ -238,7 +244,19 @@ export const CHAINS: { [chainId: number]: BasicChainInformation | ExtendedChainI
       decimals: 18
     },
     blockExplorerUrls: ['https://moonbase.moonscan.io'],
-  }
+  },
+  1001: {
+    urls: [
+      'https://public-en-baobab.klaytn.net',
+    ],
+    name: 'Klayton Testnet',
+    nativeCurrency: {
+      name: 'KLAY',
+      symbol: 'KLAYt',
+      decimals: 18
+    },
+    blockExplorerUrls: ['https://klayton.com'],
+  },
   
 }
 

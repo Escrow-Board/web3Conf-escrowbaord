@@ -14,7 +14,7 @@ import {
 	TransactionResponse,
 } from "@ethersproject/providers";
 import { BigNumber, ContractReceipt, ethers, Event } from "ethers";
-import { EscrowDoc, EscrowMeta, NewEscrowInputs } from "../types/general";
+import { EscrowDoc, EscrowMeta, NewEscrowInputs } from '../types/general';
 import { useWeb3Storage } from "../hooks/web3";
 import {
 	EscrowResponse,
@@ -410,18 +410,35 @@ export const useStoreEscrowMutation = () => {
 					new Date(data.expire_at).getTime() / 1000
 				);
 				
-
-				approveTokens(data.amount).catch((error) => {
-						console.log(error.message);
-					});
-				const interaction = await escrowContract.newEscrow(
+				
+				console.log( "data ==========>>>>>>>>>", data.sellerAddress )
+				console.log( "data ==========>>>>>>>>>", cid )
+				console.log("data ==========>>>>>>>>>",expireInSeconds)
+				
+					const interaction = await escrowContract.newEscrow(
 					data.sellerAddress,
-					ethers.utils.parseUnits(`${data.amount}`, decimals??18),
+					ethers.utils.parseUnits(`${data.amount}`, decimals ?? 18),
 					cid,
-					expireInSeconds
+					expireInSeconds,
+					{gasLimit: 2000000}
+					
 				);
+				// approveTokens(data.amount).catch((error) => {
+				// 		console.log(error.message);
+				// 	});
+				// const interaction = await escrowContract.newEscrow(
+				// 	data.sellerAddress,
+				// 	ethers.utils.parseUnits(`${data.amount}`, decimals??18),
+				// 	cid,
+				// 	expireInSeconds
+				// );
+
+								
+
+				
 
 				return interaction.wait();
+
 			};
 			return toastQuery<ContractReceipt>(storeEscrow(), {
 				loading: "Creating Escrow...Please don't close your browser",
